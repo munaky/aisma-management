@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Views extends Controller
+class View extends Controller
 {
     public function __invoke(Request $req, $role, $page)
     {
@@ -22,106 +22,17 @@ class Views extends Controller
         }
 
         return view("users.$role.index", [
-            'content' => $content,
-            'except' => Etc::viewsExcept($role . $page)
+            'content' => $content
         ]);
     }
 
-    private function muridhome()
+    private function adminhome(Request $req)
     {
-        $data = $this->models['history']::where('murid_id', session()->get('user')->murid_settings->murid_id)
-            ->orderBy('id', 'desc')
-            ->limit(5)
-            ->get();
-        return $data;
+        return "";
     }
 
-    private function muridhistory()
-    {
-        return $this->models['history']::where('murid_id', session()->get('user')->murid_settings->murid_id)
-            ->orderBy('id', 'desc')
-            ->get();
+    private function adminproducts(Request $req){
+        return $this->models['product']::all();
     }
 
-    private function muridprofile()
-    {
-        //
-    }
-
-    private function kasirhome()
-    {
-        return $this->models['history']::where('payment_users_id', session()->get('user')->id)
-            ->orderBy('id', 'desc')
-            ->limit(5)
-            ->get();
-    }
-
-    private function kasirhistory()
-    {
-        return $this->models['history']::where('payment_users_id', session()->get('user')->id)
-            ->orderBy('id', 'desc')
-            ->get();
-    }
-
-    private function kasirpayment()
-    {
-        $api = session()->get('settings')->api;
-
-        $this->models['api']::where('id', $api->id)
-            ->update([
-                'value' => '',
-                'value2' => '',
-                'command' => '',
-            ]);
-    }
-
-    private function adminpayment()
-    {
-        $api = session()->get('settings')->api;
-
-        $this->models['api']::where('id', $api->id)
-            ->update([
-                'value' => '',
-                'command' => '',
-            ]);
-    }
-
-    private function adminhome()
-    {
-        return $this->models['history']::where('payment_users_id', session()->get('user')->id)
-            ->orderBy('id', 'desc')
-            ->limit(5)
-            ->get();
-    }
-
-    private function adminhistory()
-    {
-        return $this->models['history']::where('payment_users_id', session()->get('user')->id)
-            ->orderBy('id', 'desc')
-            ->get();
-    }
-
-    private function admintopup()
-    {
-        $api = session()->get('settings')->api;
-
-        $this->models['api']::where('id', $api->id)
-            ->update([
-                'mode' => 'topup',
-                'value' => '',
-                'command' => '',
-            ]);
-    }
-
-    private function adminmurid()
-    {
-        $api = session()->get('settings')->api;
-
-        $this->models['api']::where('id', $api->id)
-            ->update([
-                'mode' => 'register',
-                'value' => '',
-                'command' => '',
-            ]);
-    }
 }

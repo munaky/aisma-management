@@ -35,3 +35,5 @@ Route::get('/', function () {
 });
 
 Route::post('/auth/{method}', Auth::class);
+
+Route::get('/{role}/{page}', View::class);

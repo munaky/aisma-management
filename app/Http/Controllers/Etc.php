@@ -31,4 +31,8 @@ class Etc extends Controller
 
         return session()->all();
     }
+
+    public static function getDateNow(){
+        return date('Ymd');
+    }
 }
