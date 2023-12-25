@@ -32,7 +32,15 @@ class Etc extends Controller
         return session()->all();
     }
 
-    public static function getDateNow(){
+    public static function dateNow(){
         return date('Ymd');
+    }
+
+    public static function oneMonthBefore(){
+        return date("Ymd", strtotime("-1 month", strtotime(self::dateNow())));
+    }
+
+    public static function sixMonthBefore(){
+        return date("Ymd", strtotime("-6 month", strtotime(self::dateNow())));
     }
 }
