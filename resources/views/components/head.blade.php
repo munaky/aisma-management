@@ -31,10 +31,10 @@
     <script src="{{ asset('js/sb-admin-2.min.js') }}" defer></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}" defer></script>
+    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/demo/chart-area-demo.js') }}" defer></script> --}}
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}" defer></script>
 
     <!-- -->

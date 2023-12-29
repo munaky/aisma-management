@@ -13,4 +13,8 @@ class ProductHistory extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['histories_id', 'products_id', 'amount', 'price'];
+
+    public function detail(){
+        return $this->hasOne(Product::class, 'id', 'products_id');
+    }
 }

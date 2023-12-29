@@ -97,7 +97,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url('admin/post/product/add') }}">
+            <form method="POST" action="{{ url('admin/post/product/add') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                     <label class="form-label">Pilih Gambar : </label>
                     <input type="file" name="image" placeholder="Enter Nama Murid" required>
@@ -117,9 +118,8 @@
                     <textarea type="text" class="form-control mb-2" name="description" placeholder="Enter Deskripsi" required> </textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="add">Save
-                        changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary" id="add">Simpan</button>
                 </div>
             </form>
         </div>
@@ -136,7 +136,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url('admin/post/product/edit') }}">
+            <form method="POST" action="{{ url('admin/post/product/edit') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                     <label class="form-label">Pilih Gambar : </label>
                     <input type="file" name="image" placeholder="Enter Nama Murid" required>
@@ -176,17 +177,21 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <input type="text" class="d-none" value="" id="deleteId">
-                <div>
-                    Apakah yakin ingin menghapus Data Tersebut??
-                </div>
+            <form method="POST" action="{{ url('admin/post/product/delete') }}">
+                @csrf
+                <div class="modal-body">
+                    <input type="text" class="d-none" value="" id="deleteId">
+                    <div>
+                        Apakah yakin ingin menghapus Data Tersebut??
+                    </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger" id="delete" data-dismiss="modal">Delete</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" id="delete"
+                        data-dismiss="modal">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -203,6 +208,7 @@
                 </button>
             </div>
             <form method="POST" action="{{ url('admin/post/product/list') }}">
+                @csrf
                 <div class="modal-body">
                     <input type="text" class="d-none" value="" id="listId">
                     <label class="form-label">Jumlah Barang</label>

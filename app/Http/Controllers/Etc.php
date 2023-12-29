@@ -43,4 +43,12 @@ class Etc extends Controller
     public static function sixMonthBefore(){
         return date("Ymd", strtotime("-6 month", strtotime(self::dateNow())));
     }
+
+    public static function oneYearBefore(){
+        return date("Ymd", strtotime("-6 year", strtotime(self::dateNow())));
+    }
+
+    public static function idr($number){
+        return number_format($number);
+    }
 }

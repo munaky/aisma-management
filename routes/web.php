@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Route;
 /* Controllers */
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\View;
+use App\Http\Controllers\PostProduct;
 use App\Http\Controllers\Test;
+
+/* Middlewares */
+use App\Http\Middleware\ValidateUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +40,6 @@ Route::get('/', function () {
 
 Route::post('/auth/{method}', Auth::class);
 
-Route::get('/{role}/{page}', View::class);
+Route::get('/{role}/{page}', View::class)->middleware(ValidateUser::class);
+
+Route::post('/admin/post/product/{action}', PostProduct::class);
