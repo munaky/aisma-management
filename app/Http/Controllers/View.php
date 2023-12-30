@@ -131,4 +131,19 @@ class View extends Controller
     private function adminattendance_history(Request $req){
         return $this->models['attendance_history']::with(['employee.role'])->get();
     }
+
+    private function adminlist(Request $req){
+        if(!session()->get('list')){
+            return [];
+        }
+
+        $data = session()->get('list');
+
+        foreach($data as $key => $val ){
+            $data[$key]['price'] = Etc::idr($val['price']);
+            $data[$key]['total'] = Etc::idr($val['total']);
+        }
+
+        return $data;
+    }
 }

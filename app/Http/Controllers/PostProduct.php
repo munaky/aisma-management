@@ -21,14 +21,17 @@ class PostProduct extends Controller
         $input = $req->except(['image']);
         $image = $req->file('image');
 
-        // Save Image
-        $filename = uniqid() . time() . '.' . $image->extension();
-        $path = $image->storeAs('images', $filename, 'public');
+        if ($req->has('image')) {
+            $image = $req->file('image');
+            $filename = uniqid() . time() . '.' . $image->extension();
+            $path = $image->storeAs('images', $filename, 'public');
+        }
 
         $this->models['product']::create([
-            'image' => 'storage/' . $path,
+            'image' => $req->has('image') ? 'storage/' . $path : 'storage/images/default.png',
             'name' => $input['name'],
             'size' => $input['size'],
+            'unit' => $input['unit'],
             'stock' => $input['stock'],
             'price' => $input['price'],
             'description' => $input['description']
@@ -53,6 +56,7 @@ class PostProduct extends Controller
                 'image' => $req->has('image') ? 'storage/' . $path : $input['path'],
                 'name' => $input['name'],
                 'size' => $input['size'],
+                'unit' => $input['unit'],
                 'stock' => $input['stock'],
                 'price' => $input['price'],
                 'description' => $input['description']
@@ -76,9 +80,15 @@ class PostProduct extends Controller
 
         $list = session()->get('list') ?? [];
 
+        $product = $this->models['product']::find($input['id']);
+
         array_push($list, [
             'id' => $input['id'],
-            'amount' => $input['amount']
+            'name' => $product->name ?? null,
+            'unit' => $product->unit ?? null,
+            'price' => $product->price ?? 0,
+            'amount' => $input['amount'],
+            'total' => $product->price * $input['amount'],
         ]);
 
         session()->put('list', $list);

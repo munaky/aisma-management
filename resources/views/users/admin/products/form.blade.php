@@ -17,6 +17,8 @@
                     <input type="text" class="form-control mb-2" name="name" placeholder="Enter Nama" required>
                     <label class="form-label">Ukuran</label>
                     <input type="text" class="form-control mb-2" name="size" placeholder="Enter Ukuran" required>
+                    <label class="form-label">Satuan</label>
+                    <input type="text" class="form-control mb-2" name="unit" placeholder="Enter Satuan" required>
                     <label class="form-label">Stock</label>
                     <input type="number" class="form-control mb-2" name="stock" placeholder="Enter Stock" required>
                     <label class="form-label">Harga</label>
@@ -55,6 +57,8 @@
                         placeholder="Enter Nama" required>
                     <label class="form-label">Ukuran</label>
                     <input type="text" class="form-control mb-2" name="size" placeholder="Enter Ukuran" required>
+                    <label class="form-label">Satuan</label>
+                    <input type="text" class="form-control mb-2" name="unit" placeholder="Enter Satuan" required>
                     <label class="form-label">Stock</label>
                     <input type="number" class="form-control mb-2" name="stock" placeholder="Enter Stock" required>
                     <label class="form-label">Harga</label>
