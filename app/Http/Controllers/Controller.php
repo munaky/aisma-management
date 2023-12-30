@@ -11,6 +11,9 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\History;
+use App\Models\Employee;
+use App\Models\AttendanceHistory;
+use App\Models\Card;
 
 class Controller extends BaseController
 {
@@ -24,6 +27,9 @@ class Controller extends BaseController
             'user' => User::class,
             'product' => Product::class,
             'history' => History::class,
+            'employee' => Employee::class,
+            'attendance_history' => AttendanceHistory::class,
+            'card' => Card::class,
         ];
     }
 }

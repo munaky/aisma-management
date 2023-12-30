@@ -85,6 +85,6 @@
     </div>
 </div>
 
-@include('users.admin.products.form')
+@include('users.admin.employees.form')
 
-@include('users.admin.products.script')
+@include('users.admin.employees.script')

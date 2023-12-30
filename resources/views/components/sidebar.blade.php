@@ -34,19 +34,15 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#barang"
+            aria-expanded="true" aria-controls="barang">
+            <i class="fas fa-fw fa-folder"></i>
             <span>Pengaturan Barang</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="barang" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Menu Barang:</h6>
-                <a class="collapse-item" href="#">Tambah Barang</a>
-                <a class="collapse-item" href="{{ url($role . '/products') }}">Lihat Semua Barang</a>
-                <a class="collapse-item" href="#">Lihat Semua Stok</a>
-                <a class="collapse-item" href="#">Lainnya</a>
+                <a class="collapse-item" href="{{ url($role . '/products') }}">Lihat Barang</a>
+                <a class="collapse-item" href="{{ url($role . '/list') }}">List</a>
             </div>
         </div>
     </li>
@@ -68,22 +64,29 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Penjualan:</h6>
-                <a class="collapse-item" href="#">Buat Penjualan</a>
-                <a class="collapse-item" href="#">Cetak Kuitansi</a>
-                <a class="collapse-item" href="#">Cetak Faktur</a>
-                <a class="collapse-item" href="#">Cetak Invoice</a>
-                <a class="collapse-item" href="#">Cetak Surat Jalan</a>
-
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">History:</h6>
-                <a class="collapse-item" href="#">Lihat Kuitansi</a>
-                <a class="collapse-item" href="#">Lihat Faktur</a>
-                <a class="collapse-item" href="#">Lihat Invoice</a>
-                <a class="collapse-item" href="#">Lihat Surat Jalan</a>
-                <a class="collapse-item" href="#">Lihat Semua</a>
+                <a class="collapse-item" href="{{ url($role . '/history') }}">History</a>
+                <a class="collapse-item" href="{{ url($role . '/faktur') }}">Lihat Faktur</a>
+                <a class="collapse-item" href="{{ url($role . '/invoice') }}">Lihat Invoice</a>
             </div>
         </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>History</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Lihat Faktur</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Lihat Invoice</span></a>
     </li>
 
     <!-- Nav Item - Charts -->

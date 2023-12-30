@@ -16,7 +16,8 @@ class PostProduct extends Controller
         }
     }
 
-    private function add(Request $req){
+    private function add(Request $req)
+    {
         $input = $req->except(['image']);
         $image = $req->file('image');
 
@@ -36,27 +37,32 @@ class PostProduct extends Controller
         return back();
     }
 
-    private function edit(Request $req){
+    private function edit(Request $req)
+    {
         $input = $req->except(['image']);
-        $image = $req->file('image');
 
-        // Save Image
-        $filename = uniqid() . time() . '.' . $image->extension();
-        $path = $image->storeAs('images', $filename, 'public');
+        /* Image */
+        if ($req->has('image')) {
+            $image = $req->file('image');
+            $filename = uniqid() . time() . '.' . $image->extension();
+            $path = $image->storeAs('images', $filename, 'public');
+        }
 
-        $this->models['product']::create([
-            'image' => 'storage/' . $path,
-            'name' => $input['name'],
-            'size' => $input['size'],
-            'stock' => $input['stock'],
-            'price' => $input['price'],
-            'description' => $input['description']
-        ]);
+        $this->models['product']::find($input['id'])
+            ->update([
+                'image' => $req->has('image') ? 'storage/' . $path : $input['path'],
+                'name' => $input['name'],
+                'size' => $input['size'],
+                'stock' => $input['stock'],
+                'price' => $input['price'],
+                'description' => $input['description']
+            ]);
 
         return back();
     }
 
-    private function delete(Request $req){
+    private function delete(Request $req)
+    {
         $input = $req->get('id');
 
         $this->models['product']::find($input)->delete();
@@ -64,8 +70,21 @@ class PostProduct extends Controller
         return back();
     }
 
-    private function list(Request $req){
+    private function list(Request $req)
+    {
+        $input = $req->all();
 
+        $list = session()->get('list') ?? [];
 
+        array_push($list, [
+            'id' => $input['id'],
+            'amount' => $input['amount']
+        ]);
+
+        session()->put('list', $list);
+
+        info(session()->get('list'));
+
+        return back();
     }
 }

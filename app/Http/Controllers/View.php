@@ -103,6 +103,16 @@ class View extends Controller
 
     private function adminproducts(Request $req)
     {
-        return $this->models['product']::all();
+        $data = $this->models['product']::all();
+
+        foreach ($data as $item) {
+            $item->price_idr = Etc::idr($item->price);
+        }
+
+        return $data;
+    }
+
+    private function adminemployees(Request $req){
+        
     }
 }
