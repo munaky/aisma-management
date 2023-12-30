@@ -8,21 +8,22 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url('admin/post/product/add') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('admin/post/employee/add') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <label class="form-label">Pilih Gambar : </label>
-                    <input type="file" name="image" placeholder="Enter Nama Murid" required>
                     <label class="form-label">Nama</label>
-                    <input type="text" class="form-control mb-2" name="name" placeholder="Enter Nama" required>
-                    <label class="form-label">Ukuran</label>
-                    <input type="text" class="form-control mb-2" name="size" placeholder="Enter Ukuran" required>
-                    <label class="form-label">Stock</label>
-                    <input type="number" class="form-control mb-2" name="stock" placeholder="Enter Stock" required>
-                    <label class="form-label">Harga</label>
-                    <input type="number" class="form-control mb-2" name="price" placeholder="Enter Harga" required>
-                    <label class="form-label">Deskripsi</label>
-                    <textarea type="text" class="form-control mb-2" name="description" placeholder="Enter Deskripsi" required> </textarea>
+                    <input type="text" class="form-control mb-2" name="name" value=""
+                        placeholder="Enter Nama" required>
+                    <label class="form-label">Role</label>
+                    <select class="form-control mb-2" name="role_id" id="exampleFormControlSelect1">
+                        <option class="d-none" selected>Pilih Role</option>
+                        @foreach ($data as $i)
+                            <option value="{{ $i->id }}">{{ $i->name }}</option>
+                        @endforeach
+                    </select>
+                    <label class="form-label">ID Kartu</label>
+                    <input type="text" class="form-control mb-2" name="card_uid" placeholder="Enter ID Kartu"
+                        required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -43,25 +44,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url('admin/post/product/edit') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('admin/post/employee/edit') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <input type="text" class="d-none" value="" name="id">
-                    <input type="text" class="d-none" value="" name="path">
-                    <label class="form-label">Pilih Gambar : </label>
-                    <input type="file" name="image">
                     <label class="form-label">Nama</label>
                     <input type="text" class="form-control mb-2" name="name" value=""
                         placeholder="Enter Nama" required>
-                    <label class="form-label">Ukuran</label>
-                    <input type="text" class="form-control mb-2" name="size" placeholder="Enter Ukuran" required>
-                    <label class="form-label">Stock</label>
-                    <input type="number" class="form-control mb-2" name="stock" placeholder="Enter Stock" required>
-                    <label class="form-label">Harga</label>
-                    <input type="number" class="form-control mb-2" name="price" placeholder="Enter Harga"
+                    <label class="form-label">Role</label>
+                    <select class="form-control mb-2" name="role_id" id="exampleFormControlSelect1">
+                        <option class="d-none" selected>Pilih Role</option>
+                        @foreach ($data as $i)
+                            <option value="{{ $i->id }}">{{ $i->name }}</option>
+                        @endforeach
+                    </select>
+                    <label class="form-label">ID Kartu</label>
+                    <input type="text" class="form-control mb-2" name="card_uid" placeholder="Enter ID Kartu"
                         required>
-                    <label class="form-label">Deskripsi</label>
-                    <textarea type="text" class="form-control mb-2" name="description" placeholder="Enter Deskripsi" required> </textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -83,7 +82,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url('admin/post/product/delete') }}">
+            <form method="POST" action="{{ url('admin/post/employee/delete') }}">
                 @csrf
                 <div class="modal-body">
                     <input type="text" class="d-none" name="id" id="deleteId">
@@ -95,34 +94,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-danger">Hapus</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal List -->
-<div class="modal fade" id="modalList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Catat Produk</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="POST" action="{{ url('admin/post/product/list') }}">
-                @csrf
-                <div class="modal-body">
-                    <input type="text" class="d-none" name="id">
-                    <label class="form-label">Jumlah Barang</label>
-                    <input type="number" class="form-control mb-2" name="amount" placeholder="Enter Jumlah Barang"
-                        required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-warning">List</button>
                 </div>
             </form>
         </div>

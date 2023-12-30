@@ -10,10 +10,6 @@
                 <div class="col-6">
                     <h6 class="m-0 font-weight-bold text-primary">List Karyawan</h6>
                 </div>
-                <div class="col-6 text-right">
-                    <button type="button" class="btn btn-success btn-sm delete-btn" data-toggle="modal"
-                        data-target="#modalAdd">Tambah Karyawan</button>
-                </div>
             </div>
         </div>
         <div class="card-body">
@@ -35,42 +31,28 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1"
                                             aria-label="Warna Tersedia: activate to sort column ascending"
-                                            style="width: 141.656px;">ID Kartu</th>
+                                            style="width: 141.656px;">Jam Hadir</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1"
                                             aria-label="Warna Tersedia: activate to sort column ascending"
-                                            style="width: 141.656px;">Status</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Terjual: activate to sort column ascending"
-                                            style="width: 65.5156px;">Jam Hadir</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Tanggal: activate to sort column ascending"
-                                            style="width: 85.1094px;">Aksi</th>
+                                            style="width: 141.656px;">Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">Nama</th>
                                         <th rowspan="1" colspan="1">Role</th>
-                                        <th rowspan="1" colspan="1">ID Kartu</th>
-                                        <th rowspan="1" colspan="1">Status</th>
                                         <th rowspan="1" colspan="1">Jam Hadir</th>
-                                        <th rowspan="1" colspan="1">Aksi</th>
+                                        <th rowspan="1" colspan="1">Tanggal</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @foreach ($data['employees'] as $i)
+                                    @foreach ($data as $i)
                                         <tr>
-                                            <td class="sorting_1">{{ $i->name }}</td>
-                                            <td>{{ $i->role->name }}</td>
-                                            <td>{{ $i->card->uid }}</td>
-                                            <td>{{ $i->attendance ? 'Hadir' : '-' }}</td>
-                                            <td>{{ $i->attendance->time ?? '-' }}</td>
-                                            <td><button type="button" class="btn btn-primary btn-sm edit-btn"
-                                                    data-toggle="modal" data-target="#modalEdit" id="editBtn" onclick="editBtn({{ json_encode($i) }})">Edit</button>
-                                                <button type="button" class="btn btn-danger btn-sm delete-btn"
-                                                    data-toggle="modal" data-target="#modalDelete" id="delBtn" onclick="delBtn({{ $i->id }})">Hapus</button>
-                                            </td>
+                                            <td class="sorting_1">{{ $i->employee->name }}</td>
+                                            <td>{{ $i->employee->role->name }}</td>
+                                            <td>{{ $i->time }}</td>
+                                            <td>{{ $i->date }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -82,7 +64,3 @@
         </div>
     </div>
 </div>
-
-@include('users.admin.employees.form', ['data' => $data['role']])
-
-@include('users.admin.employees.script')

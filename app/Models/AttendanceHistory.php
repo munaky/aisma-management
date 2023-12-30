@@ -12,5 +12,9 @@ class AttendanceHistory extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['employees_id', 'date_start', 'date_end'];
+    protected $fillable = ['employees_id', 'time', 'date'];
+
+    public function employee(){
+        return $this->hasOne(Employee::class, 'id', 'employees_id');
+    }
 }

@@ -72,6 +72,20 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attendance"
+            aria-expanded="true">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Absensi</span>
+        </a>
+        <div id="attendance" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ url($role . '/employees') }}">Karyawan</a>
+                <a class="collapse-item" href="{{ url($role . '/attendance_history') }}">History Absensi</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="charts.html">
             <i class="fas fa-fw fa-folder"></i>
             <span>History</span></a>

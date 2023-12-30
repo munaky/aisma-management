@@ -8,11 +8,7 @@ class Test extends Controller
 {
     public function __invoke(){
 
-        return $this->models['history']::whereBetween('date_end', [Etc::oneMonthBefore(), Etc::dateNow()])
-        ->with(['products.detail'])
-        ->withSum('products', 'price')
-        ->withSum('products', 'amount')
-        ->first();
+        return $this->models['attendance_history']::with(['employee.role'])->get();
     }
 }
 

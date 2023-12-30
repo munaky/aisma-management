@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class View extends Controller
@@ -70,14 +71,14 @@ class View extends Controller
                 $onDelivery += 1;
             }
 
-            if($yearNow == $year){
+            if ($yearNow == $year) {
                 $oneYearProfit[$month - 1] += $profit;
             }
 
-            foreach($history->products as $product){
+            foreach ($history->products as $product) {
                 $productName = $product->detail->name;
 
-                if(!in_array($productName, $bestSeller['listProducts'])){
+                if (!in_array($productName, $bestSeller['listProducts'])) {
                     array_push($bestSeller['listProducts'], $productName);
                     array_push($bestSeller['products'], ['name' => $productName, 'amount' => 0, 'percentage' => 0]);
                 }
@@ -87,7 +88,7 @@ class View extends Controller
             }
         }
 
-        foreach($bestSeller['products'] as $product){
+        foreach ($bestSeller['products'] as $product) {
             $bestSeller['products'][array_search($product, $bestSeller['products'])]['percentage'] = round(($product['amount'] / $bestSeller['total']) * 100);
         }
 
@@ -112,7 +113,22 @@ class View extends Controller
         return $data;
     }
 
-    private function adminemployees(Request $req){
-        
+    private function adminemployees(Request $req)
+    {
+        $dateNow = date('d/m/Y');
+
+        $data = [
+            'employees' => $this->models['employee']::with(['role', 'card', 'attendance' => function ($query) use ($dateNow) {
+                $query->where('date', $dateNow);
+            }])
+                ->get(),
+            'role' => $this->models['role']::all(),
+        ];
+
+        return $data;
+    }
+
+    private function adminattendance_history(Request $req){
+        return $this->models['attendance_history']::with(['employee.role'])->get();
     }
 }
