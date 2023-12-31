@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 class Test extends Controller
 {
     public function __invoke(){
-
-        return $this->models['history']::with('products.detail')->find(12);
+        $dateNow = Etc::dateNow();
+        $oneMonthBefore = Etc::oneMonthBefore();
+        $oneYearBefore = Etc::oneYearBefore();
+        return $this->models['history']::with('products.detail')
+        ->withSum('products', 'price')
+        ->withSum('products', 'amount')
+        ->get();;
     }
 }
 

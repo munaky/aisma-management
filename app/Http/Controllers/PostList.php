@@ -40,7 +40,7 @@ class PostList extends Controller
                 'histories_id' => $history->id,
                 'products_id' => $i['id'],
                 'amount' => $i['amount'],
-                'price' => $i['price']
+                'price' => $i['price'] * $i['amount'],
             ];
         }, session()->get('list'));
 

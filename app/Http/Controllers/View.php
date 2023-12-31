@@ -33,8 +33,12 @@ class View extends Controller
         $dateNow = Etc::dateNow();
         $oneMonthBefore = Etc::oneMonthBefore();
         $oneYearBefore = Etc::oneYearBefore();
-        $histories = $this->models['history']::whereBetween('date_end', [$oneYearBefore, $dateNow])
+        /* $histories = $this->models['history']::whereBetween('date_end', [$oneYearBefore, $dateNow])
             ->with('products.detail')
+            ->withSum('products', 'price')
+            ->withSum('products', 'amount')
+            ->get(); */
+        $histories = $this->models['history']::with('products.detail')
             ->withSum('products', 'price')
             ->withSum('products', 'amount')
             ->get();
@@ -49,7 +53,6 @@ class View extends Controller
         $onDelivery = 0;
         $soldToday = 0;
 
-
         foreach ($histories as $history) {
             $date = $history->date_end;
             $profit = $history->products_sum_price;
@@ -63,7 +66,7 @@ class View extends Controller
                 $soldToday += $sold;
             }
 
-            if ($date <= $dateNow || $date >= $oneMonthBefore) {
+            if ($date >= $oneMonthBefore) {
                 $oneMonthProfit += $profit;
             }
 

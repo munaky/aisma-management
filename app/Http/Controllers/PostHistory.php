@@ -19,13 +19,29 @@ class PostHistory extends Controller
     {
         $input = $req->all();
 
-        $this->models['history']::find($input['id'])
-            ->update(['status_id' => $input['status_id']]);
+        $history = $this->models['history']::find($input['id']);
+
+
+        if ($input['status_id'] == 3 && $history->status_id != 3) {
+            $this->models['history']::find($input['id'])
+                ->update([
+                    'status_id' => $input['status_id'],
+                    'date_end' => Etc::dateNow(),
+                ]);
+        }
+        else{
+            $this->models['history']::find($input['id'])
+                ->update([
+                    'status_id' => $input['status_id'],
+                ]);
+        }
+
 
         return back();
     }
 
-    private function delete(Request $req){
+    private function delete(Request $req)
+    {
         $input = $req->all();
 
         $this->models['history']::find($input['id'])->delete();
