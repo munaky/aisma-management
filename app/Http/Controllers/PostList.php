@@ -18,7 +18,13 @@ class PostList extends Controller
     private function history(Request $req){
         $input = $req->all();
 
-        $serial = intval($this->models['history']::orderBy('id', 'desc')->first()->serial_number) + 1;
+        $serial =  1;
+
+        $latest_history = $this->models['history']::orderBy('id', 'desc')->first();
+
+        if($latest_history !== null){
+            $serial = intval($latest_history->serial_number);
+        }
 
         $history = $this->models['history']::create([
             'client' => $input['client'],
