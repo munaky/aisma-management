@@ -50,6 +50,11 @@ class PostList extends Controller
             ];
         }, session()->get('list'));
 
+        foreach($products as $product){
+            $before = $this->models['product']::find($product['products_id']);
+            $this->models['product']::find($product['products_id'])->update(['sold' => $before->sold + $product['amount']]);
+        }
+
         $this->models['product_history']::insert($products);
 
         session()->forget('list');
