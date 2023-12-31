@@ -8,7 +8,7 @@ class Test extends Controller
 {
     public function __invoke(){
 
-        return $this->models['attendance_history']::with(['employee.role'])->get();
+        return $this->models['history']::with('products.detail')->find(12);
     }
 }
 

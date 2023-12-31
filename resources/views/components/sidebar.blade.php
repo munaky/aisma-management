@@ -57,21 +57,6 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Berkas</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ url($role . '/history') }}">History</a>
-                <a class="collapse-item" href="{{ url($role . '/faktur') }}">Lihat Faktur</a>
-                <a class="collapse-item" href="{{ url($role . '/invoice') }}">Lihat Invoice</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attendance"
             aria-expanded="true">
             <i class="fas fa-fw fa-folder"></i>
@@ -86,42 +71,9 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ url($role . '/history') }}">
             <i class="fas fa-fw fa-folder"></i>
             <span>History</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Lihat Faktur</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Lihat Invoice</span></a>
-    </li>
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Grafik Perusahaan</span></a>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Data Penjualan</span></a>
-    </li>
-
-    <!-- Nav Item - Super Admin -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Super Admin</span></a>
     </li>
 
     <!-- Divider -->

@@ -9,6 +9,7 @@ use App\Http\Controllers\PostProduct;
 use App\Http\Controllers\PostEmployee;
 use App\Http\Controllers\PostList;
 use App\Http\Controllers\Attendance;
+use App\Http\Controllers\Document;
 use App\Http\Controllers\Test;
 
 /* Middlewares */
@@ -44,6 +45,8 @@ Route::get('/', function () {
 Route::post('/auth/{method}', Auth::class);
 
 Route::get('/{role}/{page}', View::class)->middleware(ValidateUser::class);
+
+Route::get('/document/{type}/{id}', Document::class);
 
 Route::post('/admin/post/product/{action}', PostProduct::class);
 

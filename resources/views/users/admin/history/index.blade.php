@@ -10,12 +10,6 @@
                 <div class="col-6">
                     <h6 class="m-0 font-weight-bold text-primary">List</h6>
                 </div>
-                @if (isset($data['total']))
-                <div class="col-6 text-right">
-                    <button type="button" class="btn btn-success btn-sm delete-btn" data-toggle="modal"
-                        data-target="#modalNext" onclick="nextBtn({{ $data['total'] }}, '{{ $data['total_idr'] }}')">Selanjutnya</button>
-                </div>
-                @endif
             </div>
         </div>
         <div class="card-body">
@@ -30,22 +24,18 @@
                                         <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
                                             rowspan="1" colspan="1" aria-sort="ascending"
                                             aria-label="Nama Barang: activate to sort column descending"
-                                            style="width: 141.766px;">Nama</th>
+                                            style="width: 141.766px;">Client</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Deskripsi: activate to sort column ascending"
-                                            style="width: 235.734px;">Jumlah</th>
+                                            style="width: 235.734px;">Total</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1"
                                             aria-label="Warna Tersedia: activate to sort column ascending"
-                                            style="width: 141.656px;">Satuan</th>
+                                            style="width: 141.656px;">Status</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1"
                                             aria-label="Warna Tersedia: activate to sort column ascending"
-                                            style="width: 141.656px;">Harga Satuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1"
-                                            aria-label="Warna Tersedia: activate to sort column ascending"
-                                            style="width: 141.656px;">Total</th>
+                                            style="width: 141.656px;">Berkas</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Tanggal: activate to sort column ascending"
                                             style="width: 85.1094px;">Aksi</th>
@@ -53,29 +43,30 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <th rowspan="1" colspan="1">Jumlah</th>
-                                        <th rowspan="1" colspan="1">Satuan</th>
-                                        <th rowspan="1" colspan="1">Harga Satuan</th>
+                                        <th rowspan="1" colspan="1">Client</th>
                                         <th rowspan="1" colspan="1">Total</th>
+                                        <th rowspan="1" colspan="1">Status</th>
+                                        <th rowspan="1" colspan="1">Berkas</th>
                                         <th rowspan="1" colspan="1">Aksi</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @foreach ($data['products'] ?? [] as $i)
+                                    @foreach ($data['histories'] ?? [] as $i)
                                         <tr>
-                                            <td class="sorting_1">{{ $i['name'] }}</td>
-                                            <td>{{ $i['amount'] }}</td>
-                                            <td>{{ $i['unit'] }}</td>
-                                            <td>Rp. {{ $i['price_idr'] }}</td>
-                                            <td>Rp. {{ $i['total_idr'] }}</td>
+                                            <td class="sorting_1">{{ $i->client }}</td>
+                                            <td>{{ $i->total }}</td>
+                                            <td>{{ $i->status->name }}</td>
+                                            <td>
+                                                <a type="button" class="btn btn-success btn-sm" target="_blank" href="{{ url('/document/invoice/' . $i->id) }}">Invoice</a>
+                                                <a type="button" class="btn btn-success btn-sm" target="_blank" href="{{ url('/document/surat_jalan/' . $i->id) }}">Surat Jalan</a>
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary btn-sm edit-btn"
                                                     data-toggle="modal" data-target="#modalEdit" id="editBtn"
                                                     onclick="editBtn({{ json_encode($i) }})">Edit</button>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn"
                                                     data-toggle="modal" data-target="#modalDelete" id="delBtn"
-                                                    onclick="delBtn({{ $i['id'] }})">Hapus</button>
+                                                    onclick="delBtn({{ $i->id }})">Hapus</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -89,6 +80,6 @@
     </div>
 </div>
 
-@include('users.admin.list.form')
+{{-- @include('users.admin.history.form', ['data' => $data['status']])
 
-@include('users.admin.list.script')
+@include('users.admin.history.script') --}}

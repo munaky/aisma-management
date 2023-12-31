@@ -14,4 +14,65 @@ class PostList extends Controller
             return Etc::errView(404);
         }
     }
+
+    private function history(Request $req){
+        $input = $req->all();
+
+        $serial = intval($this->models['history']::orderBy('id', 'desc')->first()->serial_number) + 1;
+
+        $history = $this->models['history']::create([
+            'client' => $input['client'],
+            'director' => $input['director'],
+            'manager' => $input['manager'],
+            'contact' => $input['contact'],
+            'sent_via' => $input['sent_via'],
+            'driver_name' => $input['driver_name'] ?? '',
+            'serial_number' => str_pad($serial, 4, '0', STR_PAD_LEFT),
+            'serial_desc' => '/SJ-NAP.PT/VI/' . date('Y'),
+            'total' => $input['total'],
+            'total_word' => $input['total_word'],
+            'date' => date('m F Y'),
+            'date_start' => date('Ymd'),
+        ]);
+
+        $products = array_map(function ($i) use ($history) {
+            return [
+                'histories_id' => $history->id,
+                'products_id' => $i['id'],
+                'amount' => $i['amount'],
+                'price' => $i['price']
+            ];
+        }, session()->get('list'));
+
+        $this->models['product_history']::insert($products);
+
+        session()->forget('list');
+
+        return back();
+    }
+
+    private function edit(Request $req){
+        $input = $req->all();
+
+        session()->put('list', array_map(function ($i) use ($input){
+            if($i['id'] == $input['id']){
+                $i['amount'] = $input['amount'];
+                $i['total'] = $i['price'] * $input['amount'];
+            }
+
+            return $i;
+        }, session()->get('list')));
+
+        return back();
+    }
+
+    private function delete(Request $req){
+        $input = $req->all();
+
+        session()->put('list', array_filter(session()->get('list'), function ($i) use ($input) {
+            return $i['id'] != $input['id'];
+        }));
+
+        return back();
+    }
 }

@@ -128,22 +128,42 @@ class View extends Controller
         return $data;
     }
 
-    private function adminattendance_history(Request $req){
+    private function adminattendance_history(Request $req)
+    {
         return $this->models['attendance_history']::with(['employee.role'])->get();
     }
 
-    private function adminlist(Request $req){
-        if(!session()->get('list')){
+    private function adminlist(Request $req)
+    {
+        if (!session()->get('list')) {
             return [];
         }
 
-        $data = session()->get('list');
+        $total = 0;
+        $products = session()->get('list');
 
-        foreach($data as $key => $val ){
-            $data[$key]['price'] = Etc::idr($val['price']);
-            $data[$key]['total'] = Etc::idr($val['total']);
+        foreach ($products as $key => $val) {
+            $products[$key]['price_idr'] = Etc::idr($val['price']);
+            $products[$key]['total_idr'] = Etc::idr($val['total']);
+
+            $total += $val['total'];
         }
 
-        return $data;
+        return [
+            'total' => $total,
+            'total_idr' => Etc::idr($total),
+            'products' => $products,
+        ];
+    }
+
+    private function adminhistory(Request $request)
+    {
+        $histories = $this->models['history']::with(['status'])->get();
+        $status = $this->models['status']::all();
+
+        return [
+            'histories' => $histories,
+            'status' => $status,
+        ];
     }
 }
