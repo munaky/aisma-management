@@ -24,4 +24,12 @@ class PostHistory extends Controller
 
         return back();
     }
+
+    private function delete(Request $req){
+        $input = $req->all();
+
+        $this->models['history']::find($input['id'])->delete();
+
+        return back();
+    }
 }

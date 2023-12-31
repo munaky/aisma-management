@@ -80,6 +80,6 @@
     </div>
 </div>
 
-{{-- @include('users.admin.history.form', ['data' => $data['status']])
+@include('users.admin.history.form', ['data' => $data['status']])
 
-@include('users.admin.history.script') --}}
+@include('users.admin.history.script')

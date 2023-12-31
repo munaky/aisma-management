@@ -10,6 +10,7 @@ use App\Http\Controllers\PostEmployee;
 use App\Http\Controllers\PostList;
 use App\Http\Controllers\Attendance;
 use App\Http\Controllers\Document;
+use App\Http\Controllers\PostHistory;
 use App\Http\Controllers\Test;
 
 /* Middlewares */
@@ -51,6 +52,7 @@ Route::get('/document/{type}/{id}', Document::class);
 Route::post('/admin/post/product/{action}', PostProduct::class);
 
 Route::post('/admin/post/list/{action}', PostList::class);
+Route::post('/admin/post/history/{action}', PostHistory::class);
 
 Route::post('/admin/post/employee/{action}', PostEmployee::class);
 
