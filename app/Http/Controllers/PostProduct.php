@@ -82,6 +82,10 @@ class PostProduct extends Controller
 
         $product = $this->models['product']::find($input['id']);
 
+        if($product->stock - $input['amount'] < 0){
+            return back();
+        }
+
         array_push($list, [
             'id' => $input['id'],
             'name' => $product->name ?? null,
